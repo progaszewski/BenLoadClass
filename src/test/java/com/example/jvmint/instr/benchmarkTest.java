@@ -8,15 +8,18 @@ import javassist.CannotCompileException;
 
 import org.junit.Test;
 
+import com.example.jvmint.service.TestASM;
 import com.example.jvmint.service.TestJavassist;
 
-public class testTest {
-	private TestJavassist test = new TestJavassist();
+public class benchmarkTest {
+	
+	private final static int N = 10000;
 
 	@Test
-	public void agentTest(){
+	public void testClassLoadJavassist(){
 		try {
-			test.runTestJavassist(1);
+			TestJavassist test = new TestJavassist();
+			test.runTestJavassist(N);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,5 +43,17 @@ public class testTest {
 			e.printStackTrace();
 		}
 		assertTrue(true);
+	}
+	
+	@Test
+	public void testClassLoadAsm(){
+		TestASM test = new TestASM();
+		
+		try {
+			test.runTestASM(N);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
